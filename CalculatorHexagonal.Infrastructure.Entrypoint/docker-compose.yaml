@@ -1,0 +1,27 @@
+services:
+  mysql:      
+      image: mysql/mysql-server
+      volumes:
+      - db-volume:/var/lib/mysql
+      environment:
+        MYSQL_DATABASE: develop
+        MYSQL_ROOT_PASSWORD: 12345
+      
+  
+  hexagonal-calculator:
+    image: image/hexagonal-calculator:1.0
+    container_name: hexagonal-calculator
+    command: ["dotnet", "CalculatorHexagonal.Infrastructure.Entrypoint.dll"]
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production 
+    stdin_open: true
+    tty: true        
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+        reservations:
+          memory: 128M    
+    
+volumes:
+  db-volume: 

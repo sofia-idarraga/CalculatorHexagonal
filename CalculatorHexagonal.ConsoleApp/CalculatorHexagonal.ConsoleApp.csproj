@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\CalculatorHexagonal.Core\CalculatorHexagonal.Core.csproj" />
+    <ProjectReference Include="..\CalculatorHexagonal.Application\CalculatorHexagonal.Application.csproj" />
+    <ProjectReference Include="..\CalculatorHexagonal.Infrastructure\CalculatorHexagonal.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+</Project>
