@@ -30,8 +30,10 @@ namespace CalculatorHexagonal.Infrastructure.Entrypoint
             serviceCollection.AddScoped<IOperationAdapter, OperationAdapter>();
 
 
-            //var connectionString = configuration.GetSection("ConnectionStrings:Default").Value;
-            var connectionString = "Server=mysql;port=3306;Database=develop;User=root;Password=12345;";
+            var connectionString =
+                configuration["DB_CONNECTION"] ??
+                configuration.GetSection("ConnectionStrings:Default").Value;
+            //var connectionString = "Server=mysql;port=3306;Database=develop;User=root;Password=12345;";
             serviceCollection.AddDbContext<OperationDbContext>(options =>
             options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
