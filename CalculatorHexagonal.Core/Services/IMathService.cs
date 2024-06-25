@@ -2,7 +2,8 @@
 
 namespace CalculatorHexagonal.Core.Services
 {
-    public interface IOperationService : IBaseService<Operation>
+    public interface IMathService
     {
+        Result<int> Sum(Operand operand1, Operand operand2);
     }
 }

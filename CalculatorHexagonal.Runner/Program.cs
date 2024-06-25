@@ -1,16 +1,15 @@
-﻿// See https://aka.ms/new-console-template for more information
-using CalculatorHexagonal.Application.Services;
+﻿using CalculatorHexagonal.Application.Services;
 using CalculatorHexagonal.Core.Adapters;
-using CalculatorHexagonal.Core.Services;
 using CalculatorHexagonal.Infrastructure.Data.Adapters;
-using CalculatorHexagonal.Infrastructure.Entrypoint.Controllers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using CalculatorHexagonal.Infrastructure.Data.Contexts;
+using CalculatorHexagonal.Infrastructure.Entrypoint;
+using CalculatorHexagonal.Core.UseCases;
+using CalculatorHexagonal.Core.Services;
 
-
-namespace CalculatorHexagonal.Infrastructure.Entrypoint
+namespace CalculatorHexagonal.Runner
 {
     class Program
     {
@@ -25,24 +24,28 @@ namespace CalculatorHexagonal.Infrastructure.Entrypoint
                 .AddEnvironmentVariables()
                 .Build();
             serviceCollection.AddSingleton<IConfiguration>(configuration);
-            serviceCollection.AddScoped<ICalculatorService, CalculatorService>();
-            serviceCollection.AddScoped<IOperationService, OperationService>();
-            serviceCollection.AddScoped<IOperationAdapter, OperationAdapter>();
+
+            serviceCollection.AddSingleton<IValidationService, ValidationService>();
+            serviceCollection.AddSingleton<IMathService, MathService>();
+
+            serviceCollection.AddSingleton<ICalculatorUseCase, CalculatorUseCase>();
+            serviceCollection.AddSingleton<IOperationUseCase, OperationUseCase>();
+            
+            serviceCollection.AddSingleton<IOperationAdapter, OperationAdapter>();
+            serviceCollection.AddSingleton<ApplicationConsole>();
 
 
             var connectionString =
                 configuration["DB_CONNECTION"] ??
                 configuration.GetSection("ConnectionStrings:Default").Value;
-            //var connectionString = "Server=mysql;port=3306;Database=develop;User=root;Password=12345;";
             serviceCollection.AddDbContext<OperationDbContext>(options =>
             options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
-
-
             var serviceProvider = serviceCollection.BuildServiceProvider();
-            var calculatorService = serviceProvider.GetRequiredService<ICalculatorService>();
-            var operationService = serviceProvider.GetRequiredService<IOperationService>();
-            var app = new MainApplication(calculatorService, operationService);
+            var calculatorService = serviceProvider.GetRequiredService<ICalculatorUseCase>();
+            var operationService = serviceProvider.GetRequiredService<IOperationUseCase>();
+            var console = new ApplicationConsole(calculatorService,operationService);
+            var app = new MainApplication(console);
 
             await app.Run();
         }

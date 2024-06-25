@@ -6,16 +6,16 @@ using Moq;
 
 namespace CalculatorHexagonal.UnitTests.Application
 {
-    public class OperationServiceTests
+    public class OperationUseCaseTests
     {
         private readonly Mock<IOperationAdapter> _mockAdapter;
-        private readonly OperationService _operationService;
+        private readonly OperationUseCase _operationService;
 
-        public OperationServiceTests()
+        public OperationUseCaseTests()
         {
             
             _mockAdapter = new Mock<IOperationAdapter>();
-            _operationService = new OperationService(_mockAdapter.Object);
+            _operationService = new OperationUseCase(_mockAdapter.Object);
         }
 
         [Fact]

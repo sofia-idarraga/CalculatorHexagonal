@@ -1,8 +1,8 @@
 ﻿using CalculatorHexagonal.Core.Models;
 
-namespace CalculatorHexagonal.Core.Services
+namespace CalculatorHexagonal.Core.UseCases
 {
-    public interface IBaseService<TEntity>
+    public interface ICrudBaseUseCase<TEntity>
     {
         Task<Result<IEnumerable<TEntity>>> FindByDate(DateTime initDate, DateTime endDate);
         Task<Result<TEntity>> Save(TEntity entity);

@@ -28,7 +28,7 @@ namespace CalculatorHexagonal.Infrastructure.Data.Adapters
             catch (Exception ex)
             {
             
-                return Result<IEnumerable<Operation>>.Error(false, $"Failed to retrieve operations between {initDate} and {endDate}. Error: {ex.Message}");
+                return Result<IEnumerable<Operation>>.Error($"Failed to retrieve operations between {initDate} and {endDate}. Error: {ex.Message}");
             }
         }
 
@@ -52,7 +52,7 @@ namespace CalculatorHexagonal.Infrastructure.Data.Adapters
             }
             catch (Exception ex)
             {               
-                return Result<Operation>.Error(false, $"Failed to save the operation. Error: {ex.Message}");
+                return Result<Operation>.Error($"Failed to save the operation. Error: {ex.Message}");
             }
         }
 

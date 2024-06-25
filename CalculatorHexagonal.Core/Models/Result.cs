@@ -18,15 +18,21 @@
             Value = entity;
         }
 
+        public static Result<TEntity> Create(TEntity? entity)
+        {
+            var result = new Result<TEntity>(true, "", entity);
+            return result;
+        }
+
         public static Result<TEntity> Create(bool success, string? message, TEntity? entity)
         {
             var result = new Result<TEntity>(success,message,entity);
             return result;
         }
 
-        public static Result<TEntity> Error(bool success, string? message)
+        public static Result<TEntity> Error(string? message)
         {
-            var result = new Result<TEntity>(success, message, default);
+            var result = new Result<TEntity>(false, message, default);
             return result;
         }
 

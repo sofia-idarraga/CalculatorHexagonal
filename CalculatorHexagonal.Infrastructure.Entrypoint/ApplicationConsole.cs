@@ -1,14 +1,14 @@
 ﻿using CalculatorHexagonal.Core.Models;
-using CalculatorHexagonal.Core.Services;
+using CalculatorHexagonal.Core.UseCases;
 
-namespace CalculatorHexagonal.Infrastructure.Entrypoint.Controllers
+namespace CalculatorHexagonal.Infrastructure.Entrypoint
 {
-    public class MainApplication
+    public class ApplicationConsole
     {
-        private readonly ICalculatorService _calculatorService;
-        private readonly IOperationService _operationService;
+        private readonly ICalculatorUseCase _calculatorService;
+        private readonly IOperationUseCase _operationService;
 
-        public MainApplication(ICalculatorService calculatorService, IOperationService operationService)
+        public ApplicationConsole(ICalculatorUseCase calculatorService, IOperationUseCase operationService)
         {
             _calculatorService = calculatorService;
             _operationService = operationService;
@@ -33,7 +33,7 @@ namespace CalculatorHexagonal.Infrastructure.Entrypoint.Controllers
         {
             switch (operation)
             {
-                case "a":                    
+                case "a":
                     await Sum();
                     break;
                 case "b":

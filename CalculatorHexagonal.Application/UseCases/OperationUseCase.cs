@@ -1,14 +1,14 @@
 ﻿using CalculatorHexagonal.Core.Adapters;
 using CalculatorHexagonal.Core.Models;
-using CalculatorHexagonal.Core.Services;
+using CalculatorHexagonal.Core.UseCases;
 
 namespace CalculatorHexagonal.Application.Services
 {
-    public class OperationService : IOperationService
+    public class OperationUseCase : IOperationUseCase
     {
 
         private readonly IOperationAdapter _adapter;
-        public OperationService(IOperationAdapter adapter)
+        public OperationUseCase(IOperationAdapter adapter)
         {
             _adapter = adapter;
         }

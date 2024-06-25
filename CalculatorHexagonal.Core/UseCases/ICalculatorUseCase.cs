@@ -1,8 +1,8 @@
 ﻿using CalculatorHexagonal.Core.Models;
 
-namespace CalculatorHexagonal.Core.Services
+namespace CalculatorHexagonal.Core.UseCases
 {
-    public interface ICalculatorService
+    public interface ICalculatorUseCase
     {
         Task<Result<Operation>> Sum(Operand operand1, Operand operand2);
     }
