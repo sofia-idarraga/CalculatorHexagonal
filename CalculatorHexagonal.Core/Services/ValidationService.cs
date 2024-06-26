@@ -14,6 +14,12 @@ namespace CalculatorHexagonal.Core.Services
 
             return Result<bool>.Create(true);
         }
+        public Result<bool> ValidateSumComplex(Operand operand1, Operand operand2)
+        {
+            if (IsNull(operand1, operand2))
+                return Result<bool>.Error("Operands cannot be null.");
+            return Result<bool>.Create(true);
+        }
 
         private static bool IsNull(Operand operand1, Operand operand2)
         {
@@ -24,5 +30,7 @@ namespace CalculatorHexagonal.Core.Services
         {
             return !operand1.IsGreaterThan(0) || !operand2.IsGreaterThan(0);
         }
+
+        
     }
 }

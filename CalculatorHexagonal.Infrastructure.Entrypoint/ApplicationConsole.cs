@@ -1,5 +1,6 @@
 ﻿using CalculatorHexagonal.Core.Models;
 using CalculatorHexagonal.Core.UseCases;
+using System.Numerics;
 
 namespace CalculatorHexagonal.Infrastructure.Entrypoint
 {
@@ -23,7 +24,8 @@ namespace CalculatorHexagonal.Infrastructure.Entrypoint
                 Console.WriteLine("------------------------\n");
                 Console.WriteLine("Choose an option from the following list:");
                 Console.WriteLine("\ta - Add");
-                Console.WriteLine("\tb - Get Operations");
+                Console.WriteLine("\tb - Add Complex");
+                Console.WriteLine("\tc - Get Operations");
                 string op = Console.ReadLine();
                 await DoOperation(op);
             }
@@ -37,6 +39,9 @@ namespace CalculatorHexagonal.Infrastructure.Entrypoint
                     await Sum();
                     break;
                 case "b":
+                    await SumComplex();
+                    break;
+                case "c":
                     await ListOperations();
                     break;
                 default:
@@ -46,14 +51,45 @@ namespace CalculatorHexagonal.Infrastructure.Entrypoint
 
         private async Task Sum()
         {
-
             int? operand1Value = ReadOperand("Enter the first operand:");
             int? operand2Value = ReadOperand("Enter the second operand:");
 
             Operand operand1 = new Operand(operand1Value);
             Operand operand2 = new Operand(operand2Value);
 
-            var result = await _calculatorService.Sum(operand1, operand2);
+            var result = await _calculatorService.Sum<int>(operand1, operand2);
+
+            if (result.Success)
+            {
+                Console.WriteLine(result.Message);
+            }
+            else
+            {
+                Console.WriteLine($"Error: {result.Message}");
+            }
+        }
+
+        private async Task SumComplex()
+        {
+            int? operand1Value1 = ReadOperand("Enter the real part of the first complex number:");
+            int? operand1Value2 = ReadOperand("Enter the imaginary part of the first complex number:");
+
+            int? operand2Value1 = ReadOperand("Enter the real part of the second complex number:");
+            int? operand2Value2 = ReadOperand("Enter the imaginary part of the second complex number:");
+
+            Operand operand1 = new Operand(null);
+            Operand operand2 = new Operand(null);
+
+            if (operand1Value1.HasValue && operand1Value2.HasValue)
+            {
+                operand1.Value = new Complex((double)operand1Value1, (double)operand1Value2);
+            }
+            if (operand2Value1.HasValue && operand2Value2.HasValue)
+            {
+                operand2.Value = new Complex((double)operand2Value1, (double)operand2Value2);
+            }
+
+            var result = await _calculatorService.SumComplex<Complex>(operand1, operand2);
 
             if (result.Success)
             {

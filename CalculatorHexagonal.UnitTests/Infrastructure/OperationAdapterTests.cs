@@ -11,8 +11,8 @@ namespace CalculatorHexagonal.UnitTests.Infrastructure
 {
     public class OperationAdapterTests
     {
-        private Mock<OperationDbContext> _mockDbContext;
-        private OperationAdapter _operationAdapter;
+        private readonly Mock<OperationDbContext> _mockDbContext;
+        private readonly OperationAdapter _operationAdapter;
 
         public OperationAdapterTests()
         {
@@ -24,7 +24,7 @@ namespace CalculatorHexagonal.UnitTests.Infrastructure
         public async Task FindByDate_ReturnsOperationsBetweenDates()
         {
             DateTime initDate = new DateTime(2024, 6, 18, 10, 0, 0);
-            DateTime endDate = new DateTime(2024, 6, 20, 10, 0, 0);
+            DateTime endDate = new DateTime(2025, 6, 20, 10, 0, 0);
 
             var operationsList = OperationFixtures.GetTestOperations();
             var entityList = OperationFixtures.GetTestOperationEntities().AsQueryable();

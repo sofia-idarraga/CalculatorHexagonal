@@ -10,20 +10,20 @@ namespace CalculatorHexagonal.UnitTests.Utils
         {
             return new List<Operation>()
             {
-                 Operation.Create(1,2,3,"sum"),
-                 Operation.Create(5,2,7,"sum"),
-                 Operation.Create(123,0,124,"sum")
+                 Operation.Create("1","2","3","sum"),
+                 Operation.Create("5","2","7","sum"),
+                 Operation.Create("123","1","124","sum")
             };
         }
 
         public static Operation GetOperation()
         {
-            return Operation.Create(1, 2, 3, "sum");
+            return Operation.Create("1", "2", "3", "sum");
         }
 
         public static OperationEntity GetOperationEntity()
         {
-            return ToEntity( Operation.Create(1, 2, 3, "sum"));
+            return ToEntity( Operation.Create("1", "2", "3", "sum"));
         }
 
         public static List<OperationEntity> GetTestOperationEntities()

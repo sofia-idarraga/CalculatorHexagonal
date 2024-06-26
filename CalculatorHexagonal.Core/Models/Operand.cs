@@ -2,9 +2,9 @@
 {
     public class Operand
     {
-        public int? Value { get; }
+        public dynamic? Value { get; set; }
 
-        public Operand(int? value)
+        public Operand(dynamic? value)
         {
             Value = value;
         }
@@ -14,7 +14,7 @@
             return Value == null;
         }
 
-        public bool IsGreaterThan(int threshold)
+        public bool IsGreaterThan(dynamic threshold)
         {
             return Value > threshold;
         }

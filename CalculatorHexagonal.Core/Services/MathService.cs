@@ -4,9 +4,18 @@ namespace CalculatorHexagonal.Core.Services
 {
     public class MathService : IMathService
     {
-        public Result<int> Sum(Operand operand1, Operand operand2)
+        public Result<T> Sum<T>(Operand operand1, Operand operand2)
         {
-            return Result<int>.Create((int)operand1.Value! + (int)operand2.Value!);
+            try
+            {
+                var total = operand1.Value! + operand2.Value!;
+                return Result<T>.Create(total);
+            }
+            catch (Exception ex)
+            {
+                return Result<T>.Error($"Failed to sum the operands. Error: {ex.Message}");
+            }
+
         }
     }
 }

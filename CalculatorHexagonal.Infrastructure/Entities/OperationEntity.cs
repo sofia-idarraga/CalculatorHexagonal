@@ -12,13 +12,13 @@ namespace CalculatorHexagonal.Infrastructure.Data.Entities
         public Guid Id { get; set; }
 
         [Column("operand1")]
-        public int Operand1 { get; set; }
+        public string Operand1 { get; set; }
 
         [Column("operand2")]
-        public int Operand2 { get; set; }
+        public string Operand2 { get; set; }
 
         [Column("total")]
-        public int Total { get; set; }
+        public string Total { get; set; }
 
         [Column("operation_type")]
         public string OperationType { get; set; }

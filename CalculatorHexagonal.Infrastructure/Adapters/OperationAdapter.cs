@@ -43,10 +43,10 @@ namespace CalculatorHexagonal.Infrastructure.Data.Adapters
                     Total = model.Total,
                     OperationType = model.OperationType,
                     CreationDate = model.CreationDate
-                };      
+                };
 
                 dbContext.Operations.Add(operationEntity);
-                await dbContext.SaveChangesAsync();               
+                await dbContext.SaveChangesAsync();
 
                 return Result<Operation>.Create(true, "Operation saved successfully.", model);
             }
@@ -56,7 +56,7 @@ namespace CalculatorHexagonal.Infrastructure.Data.Adapters
             }
         }
 
-        private static Operation toModel(OperationEntity entity) 
+        private static Operation toModel(OperationEntity entity)
         {
             Operation model = Operation.Create(entity.Operand1, entity.Operand2, entity.Total, entity.OperationType);
             model.CreationDate = entity.CreationDate;
