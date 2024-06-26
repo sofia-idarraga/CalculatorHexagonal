@@ -64,7 +64,7 @@ dotnet run
 
 5. Crea la tabla __operation__
  ```bash
-    CREATE TABLE operation (id CHAR(36) NOT NULL PRIMARY KEY,operand1 INT NOT NULL,operand2 INT NOT NULL,total INT NOT NULL,operation_type VARCHAR(255) NOT NULL,creation_date DATETIME NOT NULL,UNIQUE KEY(id));
+    CREATE TABLE operation (id CHAR(36) NOT NULL PRIMARY KEY,operand1 CHAR(11) NOT NULL,operand2 CHAR(11) NOT NULL,total CHAR(11) NOT NULL,operation_type VARCHAR(255) NOT NULL,creation_date DATETIME NOT NULL,UNIQUE KEY(id));
 ```
 
 6. Correr el contenedor de hexagonal-calculator
