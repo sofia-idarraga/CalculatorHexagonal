@@ -11,7 +11,7 @@ services:
   hexagonal-calculator:
     image: image/hexagonal-calculator:1.0
     container_name: hexagonal-calculator
-    command: ["dotnet", "CalculatorHexagonal.Infrastructure.Entrypoint.dll"]
+    command: ["dotnet", "CalculatorHexagonal.Runner.dll"]
     environment:
       - ASPNETCORE_ENVIRONMENT=Production 
       - DB_CONNECTION=Server=mysql;port=3306;Database=develop;User=root;Password=12345;
